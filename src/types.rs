@@ -1,7 +1,9 @@
+#[derive(Debug,Clone)]
 pub enum Value{
     typ(String),
     str(String),
-    bulk(String),
-    num(u32),
+    bulk(Option<String>),
+    num(i64),
+    err(String),
     array(Vec<Value>)
 }
