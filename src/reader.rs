@@ -7,6 +7,7 @@ use crate::types::Value;
 pub fn read_line<R:BufRead>(reader:&mut R)->std::io::Result<String>{
     let mut line=String::new();
     reader.read_line(&mut line)?;
+    println!("In the read integer  {:?}",std::str::from_utf8(&line.as_bytes()).unwrap());
     if line.ends_with("\r\n"){
         line.truncate(line.len()-2);
     }
@@ -15,6 +16,7 @@ pub fn read_line<R:BufRead>(reader:&mut R)->std::io::Result<String>{
 
 pub fn read_integer<R:BufRead>(reader:&mut R)->std::io::Result<i64>{
     let mut line=read_line(reader)?;
+    println!("In the read integer  {:?}",std::str::from_utf8(&line.as_bytes()).unwrap());
     line.parse::<i64>().map_err(|e|io::Error::new(io::ErrorKind::InvalidData,e))
 }
 
@@ -42,7 +44,7 @@ pub fn read_array<R:BufRead>(reader:&mut R)->std::io::Result<Value>{
 pub fn read_resp<R:BufRead>(reader:&mut R)->std::io::Result<Value>{
     let mut type_byte=[0u8;1];
     reader.read(&mut type_byte)?;
-    println!("In the read resp :{:?}",std::str::from_utf8(&type_byte).unwrap());
+    println!("Complete type byte is {:?}",std::str::from_utf8(&type_byte).unwrap());
     match type_byte[0] as char{
         '+' => Ok(Value::str(read_line(reader)?)),
         '-' => Ok(Value::err(read_line(reader)?)),

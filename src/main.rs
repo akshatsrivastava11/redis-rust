@@ -41,18 +41,6 @@ async fn main()->Result<(),Box<dyn Error>>{
     for   stream in listener.incoming(){
         match stream{
             Ok(mut stream)=>{
-                // let mut reader=BufReader::new(stream.try_clone()?);
-                // loop{
-                //     match read_resp(&mut reader){
-                //         Ok(value)=>{
-                //             println!("Parsed:{:?}",value);
-                //         },
-                //         Err(err)=>{
-                //             eprintln!("Error parsiing reader {}",err)
-                //         }
-                //     }
-                //     stream.write_all(b"+OK\r\n");
-                // }
                 accept_connection(stream)?
             },
             Err(err)=>{

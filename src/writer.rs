@@ -8,12 +8,7 @@ impl Value {
                 let mut out:Vec<u8> =Vec::new();
                 out.push(b"+"[0]);
                 let byte = s.as_bytes()[0]; // get the single byte
-                // out.extend_from_slice(&[&[byte]]); // wrap in 1-element array
                 out.extend_from_slice(&[byte]);
-                // let cr: [u8; 1] = [b'\r'];
-                // let lf: [u8; 1] = [b'\n'];
-                //             `
-                // let slice_of_refs: &[&[u8; 1]] = &[&cr`, &lf];
                 out.extend_from_slice(b"\r\n");
                 out
             },
@@ -28,13 +23,7 @@ impl Value {
                 let mut out:Vec<u8>=Vec::new();
                 out.push(b":"[0]);
                 let bytes=n.to_string().as_bytes()[0];
-                // out.extend_from_slice(&[&[bytes]]);
                 out.extend_from_slice(&[bytes]);
-                // let cr: [u8; 1] = [b'\r'];
-                // let lf: [u8; 1] = [b'\n'];
-                            
-                // let slice_of_refs: &[&[u8; 1]] = &[&cr, &lf];
-                // out.extend_from_slice(slice_of_refs);
                 out.extend_from_slice(b"\r\n");
                 out
             },
